@@ -12,18 +12,15 @@ public class Demo {
        Driver.getDriver().get(ConfigurationReader.getProperty("web.app.url"));
 
        LoginPage loginPage = new LoginPage();
-       loginPage.login(ConfigurationReader.getProperty("userName"), ConfigurationReader.getProperty("passWord"));
-
-       BasePage basePage = new BasePage();
-       System.out.println(basePage.menuOptionsAsList());
-
-       basePage.logOut();
-
        loginPage.login(ConfigurationReader.getProperty("librarian.username"), ConfigurationReader.getProperty("librarian.pass"));
 
-       System.out.println(basePage.menuOptionsAsList());
+       DashBoard dashBoard = new DashBoard();
+      // System.out.println(dashBoard.getBookCount());
+      // dashBoard.waitUntilLoaded();
+       System.out.println(dashBoard.getUserCount());
 
-       basePage.logOut();
+       dashBoard.logOut();
+       Driver.getDriver().close();
 
    }
 
