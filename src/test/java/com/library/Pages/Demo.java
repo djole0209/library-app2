@@ -18,9 +18,18 @@ public class Demo {
       // System.out.println(dashBoard.getBookCount());
       // dashBoard.waitUntilLoaded();
        System.out.println(dashBoard.getUserCount());
+       dashBoard.users.click();
 
-       dashBoard.logOut();
-       Driver.getDriver().close();
+       //dashBoard.logOut();
+
+      Users user = new Users();
+
+       System.out.println(user.getUserGroupOptions());
+       user.chooseUserGroup("Students");
+
+      // Driver.getDriver().close();
+
+
 
    }
 
