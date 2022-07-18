@@ -4,10 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5dfbac81-755a-46fd-83c9-acf3a3148885" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/library/Pages/Demo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Configuration.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Configuration.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/library/Pages/BasePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/library/Pages/BasePage.java" afterDir="false" />
+    <list default="true" id="5dfbac81-755a-46fd-83c9-acf3a3148885" name="Changes" comment="files">
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/library/Pages/DashBoard.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/test-classes/com/library/Pages/BasePage.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/test-classes/com/library/Pages/DashBoard$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/test-classes/com/library/Pages/DashBoard.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/test-classes/com/library/Pages/LoginPage.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/test-classes/com/library/Utilities/BrowserUtils$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/test-classes/com/library/Utilities/BrowserUtils.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/test-classes/com/library/Utilities/ConfigurationReader.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/test-classes/com/library/Utilities/Driver.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/library/Pages/Demo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/library/Pages/Demo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/library/Pages/Demo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/library/Pages/Demo.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,5 +114,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="version 1.1.2" />
+    <MESSAGE value="files" />
+    <option name="LAST_COMMIT_MESSAGE" value="files" />
   </component>
 </project>
