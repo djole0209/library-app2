@@ -3,4 +3,4 @@ target/
 .idea
 .DS_Store
 simple-cucumber-demo.iml
-.class
+*.class
