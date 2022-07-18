@@ -8,26 +8,26 @@ public class Demo {
 
 
    @Test
-   public void test1(){
+   public void test1() throws Exception{
        Driver.getDriver().get(ConfigurationReader.getProperty("web.app.url"));
 
        LoginPage loginPage = new LoginPage();
        loginPage.login(ConfigurationReader.getProperty("librarian.username"), ConfigurationReader.getProperty("librarian.pass"));
 
-       DashBoard dashBoard = new DashBoard();
-      // System.out.println(dashBoard.getBookCount());
-      // dashBoard.waitUntilLoaded();
-       System.out.println(dashBoard.getUserCount());
-       dashBoard.users.click();
+       BasePage basePage = new BasePage();
+       basePage.users.click();
 
-       //dashBoard.logOut();
+       Users usersPage = new Users();
 
-      Users user = new Users();
+       System.out.println(usersPage.getCurrentPageNumber());
+       System.out.println(usersPage.pageCount);
 
-       System.out.println(user.getUserGroupOptions());
-       user.chooseUserGroup("Students");
+       for(int i = 0; i < usersPage.pageCount; i++) {
+           usersPage.goToNextPage();
+           Thread.sleep(1000);
+       }
 
-      // Driver.getDriver().close();
+       Driver.getDriver().quit();
 
 
 
