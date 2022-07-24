@@ -4,6 +4,8 @@ import com.library.Utilities.ConfigurationReader;
 import com.library.Utilities.Driver;
 import org.junit.Test;
 
+import java.util.List;
+
 public class Demo {
 
 
@@ -19,15 +21,20 @@ public class Demo {
 
        Users usersPage = new Users();
 
-       System.out.println(usersPage.getCurrentPageNumber());
+       usersPage.setPageCount();
+
        System.out.println(usersPage.pageCount);
 
-       for(int i = 0; i < usersPage.pageCount; i++) {
-           usersPage.goToNextPage();
-           Thread.sleep(1000);
-       }
+//       List<String> list = usersPage.getUserGroupOptions();
+//       System.out.println(list);
+//
+//       for(int i = 0; i < list.size(); i++) {
+//           usersPage.chooseUserGroup(list.get(i));
+//           Thread.sleep(3000);
+//       }
 
-       Driver.getDriver().quit();
+
+       //Driver.getDriver().quit();
 
 
 
