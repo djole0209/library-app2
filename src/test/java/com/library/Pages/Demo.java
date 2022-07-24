@@ -4,6 +4,8 @@ import com.library.Utilities.ConfigurationReader;
 import com.library.Utilities.Driver;
 import org.junit.Test;
 
+import java.util.List;
+
 public class Demo {
 
 
@@ -19,15 +21,29 @@ public class Demo {
 
        Users usersPage = new Users();
 
-       System.out.println(usersPage.getCurrentPageNumber());
-       System.out.println(usersPage.pageCount);
+       System.out.println(usersPage.getCurrentPage());
+       usersPage.setPageCount();
+       System.out.println("Page count " + usersPage.pageCount);
 
-       for(int i = 0; i < usersPage.pageCount; i++) {
+
+       for(int i = 1; i < usersPage.pageCount; i++) {
+           System.out.println("\nCurrent Page => " + usersPage.getCurrentPage());
            usersPage.goToNextPage();
-           Thread.sleep(1000);
        }
 
+       System.out.println("\nCurrent Page => " + usersPage.getCurrentPage());
+
+       List<String> options = usersPage.getViewPerPageOptions();
+       for(int i = 0; i < options.size(); i++) {
+           usersPage.setViewPerPage(options.get(i));
+           System.out.println("Show records => " + options.get(i) +  " Page count for this view => " + usersPage.pageCount + " Current Page => " + usersPage.currentPage);
+       }
+
+       usersPage.setViewPerPage("10");
+
        Driver.getDriver().quit();
+
+
 
 
 
