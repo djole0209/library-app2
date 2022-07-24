@@ -21,20 +21,29 @@ public class Demo {
 
        Users usersPage = new Users();
 
+       System.out.println(usersPage.getCurrentPage());
        usersPage.setPageCount();
-
-       System.out.println(usersPage.pageCount);
-
-//       List<String> list = usersPage.getUserGroupOptions();
-//       System.out.println(list);
-//
-//       for(int i = 0; i < list.size(); i++) {
-//           usersPage.chooseUserGroup(list.get(i));
-//           Thread.sleep(3000);
-//       }
+       System.out.println("Page count " + usersPage.pageCount);
 
 
-       //Driver.getDriver().quit();
+       for(int i = 1; i < usersPage.pageCount; i++) {
+           System.out.println("\nCurrent Page => " + usersPage.getCurrentPage());
+           usersPage.goToNextPage();
+       }
+
+       System.out.println("\nCurrent Page => " + usersPage.getCurrentPage());
+
+       List<String> options = usersPage.getViewPerPageOptions();
+       for(int i = 0; i < options.size(); i++) {
+           usersPage.setViewPerPage(options.get(i));
+           System.out.println("Show records => " + options.get(i) +  " Page count for this view => " + usersPage.pageCount + " Current Page => " + usersPage.currentPage);
+       }
+
+       usersPage.setViewPerPage("10");
+
+       Driver.getDriver().quit();
+
+
 
 
 
