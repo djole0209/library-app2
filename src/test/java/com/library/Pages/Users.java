@@ -109,13 +109,13 @@ public class Users extends BasePage{
      * and total entries
      */
     public Users() {
-        waitProcessing();
         setInitialUserCount();
         setPageCount();
     }
 
     // to set the Initial number of users when the page is loaded
     private void setInitialUserCount() {
+        waitTable();
         String fullInfo = Driver.getDriver().findElement(usersInfo).getText();
         String[] words = fullInfo.split(" ");
         String userCt = "";
@@ -125,6 +125,7 @@ public class Users extends BasePage{
             }
         }
         userCt = userCt.trim();
+        userCt = userCt.replace(",", "");
         this.userCount = Integer.parseInt(userCt);
     }
 
@@ -297,6 +298,7 @@ public class Users extends BasePage{
         return getStartDateAsString().substring(8);
     }
 
+    /** TODO: Edit user info */
 
 
 

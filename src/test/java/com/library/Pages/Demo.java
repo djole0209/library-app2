@@ -21,12 +21,16 @@ public class Demo {
        loginPage.login(ConfigurationReader.getProperty("librarian.username"), ConfigurationReader.getProperty("librarian.pass"));
 
        BasePage basePage = new BasePage();
-       basePage.users.click();
+       basePage.books.click();
 
-       Users usersPage = new Users();
-       System.out.println(usersPage.userCount);
-       System.out.println(usersPage.pageCount);
+       Books books = new Books();
+       System.out.println("Current page count = " + books.pageCount);
+       System.out.println("Current page we are on = " + books.currentPage);
 
+       for(String ct : books.getViewPerPageOptions()) {
+           books.setViewPerPage(ct);
+           System.out.println(ct + " items pp || total page count " + books.pageCount);
+       }
 
        Driver.getDriver().quit();
 
