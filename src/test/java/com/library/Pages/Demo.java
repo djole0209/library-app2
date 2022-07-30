@@ -3,8 +3,12 @@ package com.library.Pages;
 import com.library.Utilities.ConfigurationReader;
 import com.library.Utilities.Driver;
 import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 
 import java.util.List;
+import java.util.Set;
 
 public class Demo {
 
@@ -17,29 +21,16 @@ public class Demo {
        loginPage.login(ConfigurationReader.getProperty("librarian.username"), ConfigurationReader.getProperty("librarian.pass"));
 
        BasePage basePage = new BasePage();
-       basePage.users.click();
+       basePage.books.click();
 
-       Users usersPage = new Users();
+       Books books = new Books();
+       System.out.println("Current page count = " + books.pageCount);
+       System.out.println("Current page we are on = " + books.currentPage);
 
-       System.out.println(usersPage.getCurrentPage());
-       usersPage.setPageCount();
-       System.out.println("Page count " + usersPage.pageCount);
-
-
-       for(int i = 1; i < usersPage.pageCount; i++) {
-           System.out.println("\nCurrent Page => " + usersPage.getCurrentPage());
-           usersPage.goToNextPage();
+       for(String ct : books.getViewPerPageOptions()) {
+           books.setViewPerPage(ct);
+           System.out.println(ct + " items pp || total page count " + books.pageCount);
        }
-
-       System.out.println("\nCurrent Page => " + usersPage.getCurrentPage());
-
-       List<String> options = usersPage.getViewPerPageOptions();
-       for(int i = 0; i < options.size(); i++) {
-           usersPage.setViewPerPage(options.get(i));
-           System.out.println("Show records => " + options.get(i) +  " Page count for this view => " + usersPage.pageCount + " Current Page => " + usersPage.currentPage);
-       }
-
-       usersPage.setViewPerPage("10");
 
        Driver.getDriver().quit();
 
