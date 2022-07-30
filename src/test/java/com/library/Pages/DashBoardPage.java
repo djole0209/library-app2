@@ -1,15 +1,13 @@
 package com.library.Pages;
 
 import com.library.Utilities.Driver;
-import org.checkerframework.checker.nullness.compatqual.NullableDecl;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class DashBoard extends BasePage{
+public class DashBoardPage extends BasePage{
 
 
     @FindBy (id = "user_count")
@@ -21,7 +19,7 @@ public class DashBoard extends BasePage{
     @FindBy (id = "borrowed_books")
     public WebElement borrowedBooks;
 
-    public DashBoard(){
+    public DashBoardPage(){
         waitUntilLoaded();
     }
     public int getUserCount(){
