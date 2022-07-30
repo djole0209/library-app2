@@ -3,10 +3,7 @@ package com.library.Pages;
 import com.github.javafaker.Bool;
 import com.library.Utilities.BrowserUtils;
 import com.library.Utilities.Driver;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -32,6 +29,32 @@ public class Users extends BasePage{
 
     @FindBy (xpath = "//select[@name='tbl_users_length']")
     public WebElement viewPerPage;
+
+    @FindBy (id = "user_status")
+    public WebElement userStatus;
+
+    @FindBy (xpath = "//th[@data-name='id']")
+    public WebElement userIdHeader;
+
+    @FindBy (xpath = "//th[@data-name='full_name']")
+    public WebElement fullNameHeader;
+
+    @FindBy (xpath = "//th[@data-name='email']")
+    public WebElement emailHeader;
+
+    @FindBy (xpath = "//th[@data-name='group_name']")
+    public WebElement groupHeader;
+
+    @FindBy (xpath = "//th[@data-name='status']")
+    public WebElement statusHeader;
+
+
+
+
+
+
+
+
 
 //    @FindBy(xpath = "//ul[@class='pagination']")
 //    public WebElement pagination;
@@ -60,6 +83,7 @@ public class Users extends BasePage{
 
     public int currentPage = 1;
     public int pageCount = 0;
+    public String currentSorting = "Descending";
 
     public Users() {
         waitProcessing();
@@ -155,6 +179,33 @@ public class Users extends BasePage{
     public void chooseUserGroup(String group){
         Select select = new Select(userGroupsDropDown);
         select.selectByVisibleText(group);
+    }
+
+    public void showActiveUsers() {
+        new Select(userStatus).selectByValue("ACTIVE");
+        waitProcessing();
+    }
+
+    public void showInactiveUsers() {
+        new Select(userStatus).selectByValue("INACTIVE");
+        waitProcessing();
+    }
+
+    public void search(String searchString) {
+        searchBox.sendKeys(searchString);
+        waitProcessing();
+    }
+
+    public void sortByUserId(String sortType) {
+        if(!currentSorting.equalsIgnoreCase(sortType)) {
+            userIdHeader.click();
+            if(currentSorting.equalsIgnoreCase("Descending")) {
+                currentSorting = "Ascending";
+            } else {
+                currentSorting = "Descending";
+            }
+        }
+        waitProcessing();
     }
 
 

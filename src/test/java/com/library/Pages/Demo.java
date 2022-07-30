@@ -25,23 +25,17 @@ public class Demo {
        usersPage.setPageCount();
        System.out.println("Page count " + usersPage.pageCount);
 
+       usersPage.sortByUserId("Descending");
+       System.out.println("Current sorting type = " + usersPage.currentSorting);
 
-       for(int i = 1; i < usersPage.pageCount; i++) {
-           System.out.println("\nCurrent Page => " + usersPage.getCurrentPage());
-           usersPage.goToNextPage();
-       }
+       usersPage.sortByUserId("Ascending");
+       System.out.println("Current sorting type = " + usersPage.currentSorting);
 
-       System.out.println("\nCurrent Page => " + usersPage.getCurrentPage());
+       usersPage.sortByUserId("Descending");
+       System.out.println("Current sorting type = " + usersPage.currentSorting);
 
-       List<String> options = usersPage.getViewPerPageOptions();
-       for(int i = 0; i < options.size(); i++) {
-           usersPage.setViewPerPage(options.get(i));
-           System.out.println("Show records => " + options.get(i) +  " Page count for this view => " + usersPage.pageCount + " Current Page => " + usersPage.currentPage);
-       }
 
-       usersPage.setViewPerPage("10");
-
-       Driver.getDriver().quit();
+       //Driver.getDriver().quit();
 
 
 
