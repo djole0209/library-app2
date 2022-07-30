@@ -24,10 +24,11 @@ public class Demo {
        basePage.users.click();
 
        Users usersPage = new Users();
+       System.out.println(usersPage.userCount);
+       System.out.println(usersPage.pageCount);
 
 
-
-       //Driver.getDriver().quit();
+       Driver.getDriver().quit();
 
 
 

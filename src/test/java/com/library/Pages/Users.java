@@ -96,14 +96,38 @@ public class Users extends BasePage{
 
     By activePageLoc = By.xpath("//li[contains(@class, 'active')]");
 
+    By usersInfo = By.id("tbl_users_info");
+
 
     public int currentPage = 1;
     public int pageCount = 0;
     public String currentSorting = "Descending";
+    public int userCount;
 
+    /**
+     * TODO: I think we still need a constructor to set initial page count,
+     * and total entries
+     */
     public Users() {
         waitProcessing();
+        setInitialUserCount();
+        setPageCount();
     }
+
+    // to set the Initial number of users when the page is loaded
+    private void setInitialUserCount() {
+        String fullInfo = Driver.getDriver().findElement(usersInfo).getText();
+        String[] words = fullInfo.split(" ");
+        String userCt = "";
+        for(int i = 0; i < words.length; i++) {
+            if(i+1 < words.length && words[i+1].equalsIgnoreCase("entries")) {
+                userCt += words[i];
+            }
+        }
+        userCt = userCt.trim();
+        this.userCount = Integer.parseInt(userCt);
+    }
+
 
 
     private int getActivePageNumber(){
@@ -121,7 +145,7 @@ public class Users extends BasePage{
         return currentPage;
     }
 
-    public void setPageCount() {
+    private void setPageCount() {
         goToLastPage();
         int act = getActivePageNumber();
         pageCount = act;
