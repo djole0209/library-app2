@@ -3,8 +3,12 @@ package com.library.Pages;
 import com.library.Utilities.ConfigurationReader;
 import com.library.Utilities.Driver;
 import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 
 import java.util.List;
+import java.util.Set;
 
 public class Demo {
 
@@ -21,18 +25,6 @@ public class Demo {
 
        Users usersPage = new Users();
 
-       System.out.println(usersPage.getCurrentPage());
-       usersPage.setPageCount();
-       System.out.println("Page count " + usersPage.pageCount);
-
-       usersPage.sortByUserId("Descending");
-       System.out.println("Current sorting type = " + usersPage.currentSorting);
-
-       usersPage.sortByUserId("Ascending");
-       System.out.println("Current sorting type = " + usersPage.currentSorting);
-
-       usersPage.sortByUserId("Descending");
-       System.out.println("Current sorting type = " + usersPage.currentSorting);
 
 
        //Driver.getDriver().quit();
