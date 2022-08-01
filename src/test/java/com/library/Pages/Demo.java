@@ -1,5 +1,6 @@
 package com.library.Pages;
 
+import com.library.Utilities.AddBooksFromAmazon;
 import com.library.Utilities.ConfigurationReader;
 import com.library.Utilities.Driver;
 import org.junit.Test;
@@ -22,15 +23,17 @@ public class Demo {
 
        BasePage basePage = new BasePage();
        basePage.books.click();
-
        Books books = new Books();
-       System.out.println("Current page count = " + books.pageCount);
-       System.out.println("Current page we are on = " + books.currentPage);
 
-       for(String ct : books.getViewPerPageOptions()) {
-           books.setViewPerPage(ct);
-           System.out.println(ct + " items pp || total page count " + books.pageCount);
-       }
+       System.out.println(books.currentPage);
+       System.out.println(books.pageCount);
+
+       AddBooksFromAmazon.getOneBookForEachCategory(books);
+
+
+
+
+
 
        Driver.getDriver().quit();
 

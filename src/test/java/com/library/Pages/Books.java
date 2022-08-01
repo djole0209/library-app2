@@ -3,6 +3,7 @@ package com.library.Pages;
 import com.library.Utilities.BrowserUtils;
 import com.library.Utilities.Driver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -27,6 +28,32 @@ public class Books extends BasePage {
 
     @FindBy (xpath = "//input[@type='search']")
     public WebElement searchBox;
+
+    @FindBy (xpath = "//input[@name='name']")
+    public WebElement newBookName;
+
+    @FindBy (xpath = "//input[@name='isbn']")
+    public WebElement newBookISBN;
+
+    @FindBy (xpath = "//input[@name='year']")
+    public WebElement newBookYear;
+
+    @FindBy (xpath = "//input[@name='author']")
+    public WebElement newBookAuthor;
+
+    @FindBy (xpath = "//select[@name='book_category_id']")
+    public WebElement newBookCategory;
+
+    @FindBy (id = "description")
+    public WebElement newBookDescription;
+
+    @FindBy (xpath = "//button[@type='submit']")
+    public WebElement newBookSaveChangesBtn;
+
+    @FindBy (xpath = "//button[@type='cancel']")
+    public WebElement newBookCloseBtn;
+
+
 
     By booksInfo = By.xpath("//div[@id='tbl_books_info']");
 
@@ -144,6 +171,50 @@ public class Books extends BasePage {
         waitProcessing();
     }
 
+    public void addBook(String bookName, String author, String year) {
+        this.addBookBtn.click();
+        newBookName.sendKeys(bookName);
+        newBookAuthor.sendKeys(author);
+        newBookYear.sendKeys(year);
+        newBookSaveChangesBtn.click();
+    }
+
+    public void addBook(String bookName, String author, String year, String description) {
+        this.addBookBtn.click();
+        newBookName.sendKeys(bookName);
+        newBookAuthor.sendKeys(author);
+        newBookYear.sendKeys(year);
+        newBookDescription.sendKeys(description);
+        newBookSaveChangesBtn.click();
+    }
+
+    public void addBook(String bookName, String isbn, String year, String author, String bookcategory, String description) {
+        List<String> bookCategoryOptions = getBookCategoryOptions();
+        int i = 0;
+        for(; i < bookCategoryOptions.size(); i++) {
+            if(bookCategoryOptions.get(i).toLowerCase().contains(bookcategory.toLowerCase())) {
+                break;
+            }
+        }
+        this.addBookBtn.click();
+        newBookName.sendKeys(bookName);
+        newBookAuthor.sendKeys(author);
+        newBookDescription.sendKeys(description);
+        newBookSaveChangesBtn.click();
+        new Select(newBookCategory).selectByIndex(i);
+        newBookDescription.sendKeys(description);
+        newBookSaveChangesBtn.click();
+    }
+
+    public List<String> getBookCategoryOptions(){
+        Select select = new Select(newBookCategory);
+        List<String> list = new ArrayList<>();
+
+        for(WebElement each : select.getOptions()){
+            list.add(each.getText());
+        }
+        return list;
+    }
 
     private void waitProcessing() {
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
@@ -160,7 +231,14 @@ public class Books extends BasePage {
 
     private void waitTable() {
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+        wait.ignoring(TimeoutException.class);
         wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.xpath("//tbody//tr//td"), 12));
     }
 
 }
+
+/**
+ * TODO: add book if the book does not exist
+ * TODO: we can create a new table, or query from the current table
+ * TODO: if we alter the table, we should commit, so that when we query again it will show us if we have it or not
+ */
