@@ -259,11 +259,31 @@ public class Users extends BasePage{
         newUserEmail.sendKeys(faker.internet().emailAddress());
         new Select(newUserGroupDropDown).selectByVisibleText(userGroup);
         new Select(newUserStatusDropDown).selectByVisibleText(userStatus);
+        /** TODO: decide on end date logic */
         newUserEndDate.sendKeys(endDate);
         newUserAddress.sendKeys(userAddress);
         newUserSubmitButton.click();
     }
 
+    public String getStartDateAsStr() {
+        return this.newUserStartDate.getAttribute("value");
+    }
+
+    public String getStartDateYear() {
+        return getStartDateAsStr().substring(0,4);
+    }
+
+    public String getStartDateMonth() {
+        return getStartDateAsStr().substring(5,7);
+    }
+
+    public String getStartDateDay() {
+        return getStartDateAsStr().substring(8);
+    }
+
+
+    // this is the complicated version, but still works
+    // good logic, we did not want to lose this
     public String getStartDateAsString() {
         newUserStartDate.click();
         String copy = Keys.chord(Keys.CONTROL, "A", "C");
@@ -273,6 +293,7 @@ public class Users extends BasePage{
         ((JavascriptExecutor)Driver.getDriver()).executeScript("window.open('https://www.google.com','_blank');");
 
         Set<String> windowHandles = Driver.getDriver().getWindowHandles();
+
         for(String handle : windowHandles) {
             Driver.getDriver().switchTo().window(handle);
             if(Driver.getDriver().getCurrentUrl().contains("google")) {
@@ -286,17 +307,7 @@ public class Users extends BasePage{
         return dateAsText;
     }
 
-    public String getStartDateYear() {
-        return getStartDateAsString().substring(0,4);
-    }
 
-    public String getStartDateMonth() {
-        return getStartDateAsString().substring(5,7);
-    }
-
-    public String getStartDateDay() {
-        return getStartDateAsString().substring(8);
-    }
 
     /** TODO: Edit user info */
 
