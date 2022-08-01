@@ -2,10 +2,7 @@ package com.library.Pages;
 
 import com.library.Utilities.BrowserUtils;
 import com.library.Utilities.Driver;
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -169,6 +166,22 @@ public class Books extends BasePage {
     public void search(String searchString) {
         searchBox.sendKeys(searchString);
         waitProcessing();
+    }
+
+    public void addBook(List<String> bookInfo) {
+        this.addBookBtn.click();
+        newBookName.sendKeys(bookInfo.get(0));
+        newBookISBN.sendKeys(bookInfo.get(1));
+        newBookYear.sendKeys(bookInfo.get(2));
+        newBookAuthor.sendKeys(bookInfo.get(3));
+//        ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].setAttribute('value', arguments[1]); ", newBookAuthor, bookInfo.get(3));
+        new Select(newBookCategory).selectByVisibleText(bookInfo.get(4));
+        newBookDescription.sendKeys(bookInfo.get(5).substring(0,50));
+        newBookAuthor.click();
+        String author = bookInfo.get(3);
+        author = author.length() == 0 ? "N/A" : author;
+        newBookAuthor.sendKeys(author);
+        newBookSaveChangesBtn.click();
     }
 
     public void addBook(String bookName, String author, String year) {
