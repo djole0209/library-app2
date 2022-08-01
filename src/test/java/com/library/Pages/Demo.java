@@ -28,29 +28,6 @@ public class Demo {
        Books books = new Books();
        AddBooksFromAmazon.getOneBookForEachCategory(books);
 
-       List<List<String>> booksInfoFromAmazon = AddBooksFromAmazon.booksList;
-       for(List<String> eachBook : booksInfoFromAmazon) {
-           System.out.println(eachBook);
-       }
-
-
-
-//       System.out.println(books.currentPage);
-//       System.out.println(books.pageCount);
-//       String windowHandle = Driver.getDriver().getWindowHandle();
-//
-//       AddBooksFromAmazon.getOneBookForEachCategory(books);
-//
-//       List<List<String>> booksInfoFromAmazon = AddBooksFromAmazon.booksList;
-//       Driver.getDriver().switchTo().window(windowHandle);
-//       int i = 0;
-//       for(List<String> eachBook : booksInfoFromAmazon) {
-//           books.addBook(eachBook, i);
-//           i++;
-//       }
-
-       //books.addBook("Selam", "Yo", "2012");
-
        Driver.getDriver().quit();
    }
 
