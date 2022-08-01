@@ -28,6 +28,9 @@ public class Demo {
        Books books = new Books();
        AddBooksFromAmazon.getOneBookForEachCategory(books);
 
+       for(List<String> list : AddBooksFromAmazon.booksList) {
+           books.addBook(list);
+       }
        Driver.getDriver().quit();
    }
 

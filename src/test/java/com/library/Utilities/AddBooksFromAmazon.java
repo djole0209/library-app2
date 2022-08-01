@@ -52,7 +52,7 @@ public class AddBooksFromAmazon {
         } catch (Exception e) {
             amazonSearchBox = Driver.getDriver().findElement(By.xpath("//input[@id='nav-bb-search']"));
         }
-        int index = 0;
+
         for(String str : categories) {
             clickedFromFirstSearch = false;
             try {
@@ -68,11 +68,8 @@ public class AddBooksFromAmazon {
             for(int i = 0; i < 25; i++) {
                 String[] info = getInformation();
                 List<String> bookInd = new ArrayList<>(Arrays.asList(info));
-                books.addBook(bookInd,index);
-                //book.add(4, str);
-                //booksList.add(book);
+                booksList.add(bookInd);
             }
-            index++;
         }
 
         closeAmazon();
