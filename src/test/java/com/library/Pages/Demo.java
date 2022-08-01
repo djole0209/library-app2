@@ -27,13 +27,17 @@ public class Demo {
 
        System.out.println(books.currentPage);
        System.out.println(books.pageCount);
+       String windowHandle = Driver.getDriver().getWindowHandle();
 
        AddBooksFromAmazon.getOneBookForEachCategory(books);
 
+       List<List<String>> booksInfoFromAmazon = AddBooksFromAmazon.booksList;
+       Driver.getDriver().switchTo().window(windowHandle);
+       for(List<String> eachBook : booksInfoFromAmazon) {
+           books.addBook(eachBook);
+       }
 
-
-
-
+       //books.addBook("Selam", "Yo", "2012");
 
        Driver.getDriver().quit();
 
