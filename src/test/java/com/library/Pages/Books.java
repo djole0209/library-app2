@@ -168,19 +168,15 @@ public class Books extends BasePage {
         waitProcessing();
     }
 
-    public void addBook(List<String> bookInfo) {
+    public void addBook(List<String> bookInfo, int index) {
         this.addBookBtn.click();
-        newBookName.sendKeys(bookInfo.get(0));
+        newBookName.sendKeys("G4" + bookInfo.get(0));
         newBookISBN.sendKeys(bookInfo.get(1));
         newBookYear.sendKeys(bookInfo.get(2));
         newBookAuthor.sendKeys(bookInfo.get(3));
 //        ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].setAttribute('value', arguments[1]); ", newBookAuthor, bookInfo.get(3));
-        new Select(newBookCategory).selectByVisibleText(bookInfo.get(4));
-        newBookDescription.sendKeys(bookInfo.get(5).substring(0,50));
-        newBookAuthor.click();
-        String author = bookInfo.get(3);
-        author = author.length() == 0 ? "N/A" : author;
-        newBookAuthor.sendKeys(author);
+        new Select(newBookCategory).selectByIndex(index);
+        newBookDescription.sendKeys((bookInfo.get(5).length() > 50 ? bookInfo.get(5).substring(0,50) : bookInfo.get(5)) + " Group 4 Is the Best Adding books from Amazon");
         newBookSaveChangesBtn.click();
     }
 
