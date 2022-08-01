@@ -176,7 +176,7 @@ public class Books extends BasePage {
         newBookAuthor.sendKeys(bookInfo.get(3));
 //        ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].setAttribute('value', arguments[1]); ", newBookAuthor, bookInfo.get(3));
         new Select(newBookCategory).selectByIndex(index);
-        newBookDescription.sendKeys((bookInfo.get(5).length() > 50 ? bookInfo.get(5).substring(0,50) : bookInfo.get(5)) + " Group 4 Is the Best Adding books from Amazon");
+        newBookDescription.sendKeys((bookInfo.get(5).length() > 50 ? bookInfo.get(5).substring(0,50) : bookInfo.get(5)));
         newBookSaveChangesBtn.click();
     }
 

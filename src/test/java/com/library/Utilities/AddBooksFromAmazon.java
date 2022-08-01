@@ -52,7 +52,7 @@ public class AddBooksFromAmazon {
         } catch (Exception e) {
             amazonSearchBox = Driver.getDriver().findElement(By.xpath("//input[@id='nav-bb-search']"));
         }
-
+        int index = 0;
         for(String str : categories) {
             clickedFromFirstSearch = false;
             try {
@@ -65,12 +65,14 @@ public class AddBooksFromAmazon {
             amazonSearchBox.sendKeys(searchText + Keys.ENTER);
             //BrowserUtils.clickWithJS(Driver.getDriver().findElement(By.id("p_n_feature_browse-bin/2656022011")));
             //new WebDriverWait(Driver.getDriver(), 10).until(ExpectedConditions.numberOfElementsToBeMoreThan(By.xpath("//img[contains(@class, 's-image')]"), 15));
-            for(int i = 0; i < 2; i++) {
+            for(int i = 0; i < 25; i++) {
                 String[] info = getInformation();
-                List<String> book = new ArrayList<>(Arrays.asList(info));
+                List<String> bookInd = new ArrayList<>(Arrays.asList(info));
+                books.addBook(bookInd,index);
                 //book.add(4, str);
-                booksList.add(book);
+                //booksList.add(book);
             }
+            index++;
         }
 
         closeAmazon();
