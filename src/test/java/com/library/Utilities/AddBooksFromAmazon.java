@@ -269,7 +269,7 @@ public class AddBooksFromAmazon {
         } else if (str.contains("Fantasy") || str.contains("Cookbooks") || str.contains("Food") || str.contains("Wine")) {
             category = "Fantasy";
         } else if (str.contains("Historical fiction") || str.contains("Christian Books & Bibles") || str.contains("History") || str.contains("Religion & Spirituality")) {
-            category = "Historical fiction";
+            category = "Historical Fiction";
         } else if (str.contains("Horror") || str.contains("Law") || str.contains("Parenting & Relationship")) {
             category = "Horror";
         } else if (str.contains("Science Fiction") || str.contains("Computer & Techonology") || str.contains("Science Fiction & Fantasy") || str.contains("Wine")) {
