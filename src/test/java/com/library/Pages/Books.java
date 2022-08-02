@@ -184,6 +184,7 @@ public class Books extends BasePage {
         new Select(newBookCategory).selectByVisibleText(bookInfo.get(4).trim());
         newBookDescription.sendKeys((bookInfo.get(5).length() > 50 ? bookInfo.get(5).substring(0,50) : bookInfo.get(5)));
         newBookSaveChangesBtn.click();
+        waitProcessing();
     }
 
     public void addBook(String bookName, String author, String year) {
