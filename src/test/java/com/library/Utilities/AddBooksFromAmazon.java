@@ -110,14 +110,17 @@ public class AddBooksFromAmazon {
 
 
 
-        // swatchElement selected resizedSwatchElement
-//        List<WebElement> bookTypeOptions = Driver.getDriver().findElements(By.xpath("//li[contains(@class,'resizedSwatchElement')]"));
-//        for(WebElement element : bookTypeOptions) {
-//            if(element.getAttribute("innerHTML").contains("Paperback")) {
-//                element.click();
-//                break;
-//            }
-//        }
+
+        List<WebElement> bookTypeOptions = Driver.getDriver().findElements(By.xpath("//li[contains(@class,'resizedSwatchElement')]"));
+        for(WebElement element : bookTypeOptions) {
+            if(element.getAttribute("innerHTML").contains("Paperback")) {
+                element.click();
+                break;
+            } else if(element.getAttribute("innerHTML").contains("Hardcover")){
+                element.click();
+            }
+        }
+
 
         try {
             //Point newPoint = new Point(540,720);
@@ -140,13 +143,21 @@ public class AddBooksFromAmazon {
 
             }
         } catch (Exception e) {}
-
-        bookInfo[0] = getBookName();
-        bookInfo[1] = getIsbn();
-        bookInfo[2] = getYear();
-        bookInfo[3] = getAuthor();
-        bookInfo[4] = getCategory();
-        bookInfo[5] = getDescription();
+        try {
+            bookInfo[0] = getBookName();
+            bookInfo[1] = getIsbn();
+            bookInfo[2] = getYear();
+            bookInfo[3] = getAuthor();
+            bookInfo[4] = getCategory();
+            bookInfo[5] = getDescription();
+        } catch (Exception e) {
+            bookInfo[0] = getBookName();
+            bookInfo[1] = "999-999999";
+            bookInfo[2] = "2022";
+            bookInfo[3] = "Amazon Should Fix This";
+            bookInfo[4] = "Memoir";
+            bookInfo[5] = getDescription();
+        }
         return bookInfo;
     }
 
