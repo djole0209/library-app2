@@ -18,6 +18,14 @@ public class AddBooksFromAmazon {
     public static List<List<String>> booksList = new ArrayList<>();
     public static boolean clickedFromFirstSearch = false;
     public static String booksPageWindowHandle = "";
+    public static List<String> anchorBooks = new ArrayList<>();
+
+    static {
+        anchorBooks.add("https://www.amazon.com/Great-Reset-War-World/dp/1510774041/ref=lp_3_1_3");
+        anchorBooks.add("https://www.amazon.com/dp/1250819628/ref=sspa_dk_detail_0?psc=1&pd_rd_i=1250819628&pd_rd_w=mI6Hb&content-id=amzn1.sym.3be1c5b9-5b41-4830-a902-fa8556c19eb5&pf_rd_p=3be1c5b9-5b41-4830-a902-fa8556c19eb5&pf_rd_r=C14X8SFVMZMZWMG7ARQ6&pd_rd_wg=MY3gZ&pd_rd_r=98be537b-e277-43b8-ab61-c9d836de3395&s=books&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWw&spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUEyWkVaOEg3V1BFU1ZQJmVuY3J5cHRlZElkPUEwMjQwNDA0TTJCWlZTRkhWUjZBJmVuY3J5cHRlZEFkSWQ9QTEwMzE1OTUzQjFXREZaQjBKV0FSJndpZGdldE5hbWU9c3BfZGV0YWlsJmFjdGlvbj1jbGlja1JlZGlyZWN0JmRvTm90TG9nQ2xpY2s9dHJ1ZQ==");
+        anchorBooks.add("https://www.amazon.com/Big-Lie-Book-History-Aristotle/dp/B0B3SDX4S2/ref=d_pd_sbs_sccl_3_4/147-1432555-4355025?pd_rd_w=KMMf1&content-id=amzn1.sym.d8274306-8eaa-4da3-9175-aca6400f9aa9&pf_rd_p=d8274306-8eaa-4da3-9175-aca6400f9aa9&pf_rd_r=NDR20KHYDYYA6VQTYYCA&pd_rd_wg=mYKPn&pd_rd_r=b5350ee6-16b4-441e-9fe0-849abf0f45d3&pd_rd_i=B0B3SDX4S2&psc=1");
+        anchorBooks.add("https://www.amazon.com/dp/1541757009/ref=sspa_dk_detail_5?psc=1&pd_rd_i=1541757009&pd_rd_w=OxlBC&content-id=amzn1.sym.3be1c5b9-5b41-4830-a902-fa8556c19eb5&pf_rd_p=3be1c5b9-5b41-4830-a902-fa8556c19eb5&pf_rd_r=THTGBJVVB7QNE3F3S9R8&pd_rd_wg=lTyPH&pd_rd_r=ce9cd8e1-b292-4adf-b03e-35f7b098a329&s=books&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWw&spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUEzMklYSVBISFE3U1MzJmVuY3J5cHRlZElkPUEwOTE5MjIwMlAzVk43MlU2QkJaUyZlbmNyeXB0ZWRBZElkPUEwOTY2MzQwMjMzMEJGUUNSVU1KVCZ3aWRnZXROYW1lPXNwX2RldGFpbCZhY3Rpb249Y2xpY2tSZWRpcmVjdCZkb05vdExvZ0NsaWNrPXRydWU=");
+    }
 
     private static void openAmazonAndSwithToIt() {
         booksPageWindowHandle = Driver.getDriver().getWindowHandle();
@@ -276,7 +284,7 @@ public class AddBooksFromAmazon {
 
 
     private static void openNewBook() {
-            WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 5);
+            WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
             WebElement elem = null;
             try {
                 elem = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='sp_detail']//ol")));
@@ -301,9 +309,10 @@ public class AddBooksFromAmazon {
             try {
                 book.click();
             } catch (Exception e) {
-                book = Driver.getDriver().findElement(By.xpath("//div[@id='rhf']//ol//li"));
-                BrowserUtils.scrollToElement(book);
-                book.click();
+                //book = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='rhf']//ol//li")));
+                //BrowserUtils.scrollToElement(book);
+                //book.click();
+                Driver.getDriver().get(anchorBooks.get(ThreadLocalRandom.current().nextInt(0, anchorBooks.size())));
             }
             //WebElement bookLink = book.findElement(By.xpath(".//a"));
             //((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].click();", book);
