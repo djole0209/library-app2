@@ -170,7 +170,7 @@ public class Books extends BasePage {
 
     public void addBook(List<String> bookInfo) {
         this.addBookBtn.click();
-        newBookName.sendKeys("G4" + bookInfo.get(0));
+        newBookName.sendKeys("G4_" + bookInfo.get(0));
         newBookISBN.sendKeys(bookInfo.get(1));
         newBookYear.sendKeys(bookInfo.get(2));
         newBookAuthor.sendKeys(bookInfo.get(3));

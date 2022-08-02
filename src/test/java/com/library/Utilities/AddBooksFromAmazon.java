@@ -17,8 +17,10 @@ public class AddBooksFromAmazon {
 
     public static List<List<String>> booksList = new ArrayList<>();
     public static boolean clickedFromFirstSearch = false;
+    public static String booksPageWindowHandle = "";
 
     private static void openAmazonAndSwithToIt() {
+        booksPageWindowHandle = Driver.getDriver().getWindowHandle();
         ((JavascriptExecutor)Driver.getDriver()).executeScript("window.open('https://www.amazon.com/','_blank');");
         Set<String> handles = Driver.getDriver().getWindowHandles();
         for(String str : handles) {
@@ -65,7 +67,7 @@ public class AddBooksFromAmazon {
             amazonSearchBox.sendKeys(searchText + Keys.ENTER);
             //BrowserUtils.clickWithJS(Driver.getDriver().findElement(By.id("p_n_feature_browse-bin/2656022011")));
             //new WebDriverWait(Driver.getDriver(), 10).until(ExpectedConditions.numberOfElementsToBeMoreThan(By.xpath("//img[contains(@class, 's-image')]"), 15));
-            for(int i = 0; i < 25; i++) {
+            for(int i = 0; i < 2; i++) {
                 String[] info = getInformation();
                 List<String> bookInd = new ArrayList<>(Arrays.asList(info));
                 booksList.add(bookInd);
@@ -75,10 +77,24 @@ public class AddBooksFromAmazon {
         closeAmazon();
     }
 
+    public static void add_200_Books(Books books) {
+        for(int i = 0; i < 30; i++) {
+            getOneBookForEachCategory(books);
+            Driver.getDriver().switchTo().window(booksPageWindowHandle);
+            for(List<String> bookItem : booksList){
+                books.addBook(bookItem);
+            }
+            booksList.clear();
+        }
+    }
+
     public static String[] getInformation() {
         String [] bookInfo = new String[6];
         if(clickedFromFirstSearch == false) {
-            Driver.getDriver().findElement(By.xpath("//img[contains(@class, 's-image')]")).click();
+            List<WebElement> firstPageBooks = Driver.getDriver().findElements(By.xpath("//img[contains(@class, 's-image')]"));
+            WebElement startingBook = firstPageBooks.get(ThreadLocalRandom.current().nextInt(0,firstPageBooks.size()-1));
+            BrowserUtils.bringIntoView(startingBook);
+            startingBook.click();
             clickedFromFirstSearch = true;
         } else {
             openNewBook();
@@ -260,16 +276,21 @@ public class AddBooksFromAmazon {
 
 
     private static void openNewBook() {
-            WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+            WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 5);
             WebElement elem = null;
             try {
                 elem = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='sp_detail']//ol")));
             } catch (Exception e) {
                 try {
-                    elem = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='sp_detail_thematic-same_genre_books']//ol")));
+                    elem = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@id, 'CardInstance')]//ol")));
                 } catch (Exception er) {
-                    elem = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='similarities_feature_div']//ol")));
+                    elem = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@id, 'similarities')]//ol")));
                 }
+//                try {
+//                    elem = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='sp_detail_thematic-same_genre_books']//ol")));
+//                } catch (Exception er) {
+//                    elem = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='similarities_feature_div']//ol")));
+//                }
             }
             //WebElement elem = Driver.getDriver().findElement(By.xpath("//div[@id='sp_detail']//ol"));
             ((JavascriptExecutor) Driver.getDriver()).executeScript("arguments[0].scrollIntoView(true);", elem);
@@ -280,7 +301,8 @@ public class AddBooksFromAmazon {
             try {
                 book.click();
             } catch (Exception e) {
-                book = relatedBooks.get(ThreadLocalRandom.current().nextInt(0, relatedBooks.size()));
+                book = Driver.getDriver().findElement(By.xpath("//div[@id='rhf']//ol//li"));
+                BrowserUtils.scrollToElement(book);
                 book.click();
             }
             //WebElement bookLink = book.findElement(By.xpath(".//a"));

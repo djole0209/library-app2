@@ -9,6 +9,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
@@ -26,15 +27,20 @@ public class Demo {
        BasePage basePage = new BasePage();
        basePage.books.click();
        Books books = new Books();
-       AddBooksFromAmazon.getOneBookForEachCategory(books);
+       AddBooksFromAmazon.add_200_Books(books);
 
-       for(List<String> list : AddBooksFromAmazon.booksList) {
-           books.addBook(list);
-       }
        Driver.getDriver().quit();
    }
 
 
+   /*bookInfo[0] = getBookName();
+        bookInfo[1] = getIsbn();
+        bookInfo[2] = getYear();
+        bookInfo[3] = getAuthor();
+        bookInfo[4] = getCategory();
+        bookInfo[5] = getDescription();
+        *
+    */
 
 
 
