@@ -169,6 +169,12 @@ public class Books extends BasePage {
     }
 
     public void addBook(List<String> bookInfo) {
+        new WebDriverWait(Driver.getDriver(), 10).until(new ExpectedCondition<Boolean>() {
+            public Boolean apply(WebDriver d) {
+                JavascriptExecutor js = (JavascriptExecutor) d;
+                return (Boolean) js.executeScript("return jQuery.active == 0");
+            }
+        });
         this.addBookBtn.click();
         newBookName.sendKeys("G4_" + bookInfo.get(0));
         newBookISBN.sendKeys(bookInfo.get(1));
